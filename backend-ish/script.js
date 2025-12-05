@@ -44,4 +44,4 @@ submitBtn.addEventListener("click", async () => {
     chatBox.lastChild.textContent = "";
     appendMessage(`Fetch error: ${err.message}`, "bot");
   }
-});
+}); 
