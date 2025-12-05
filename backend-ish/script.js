@@ -1,6 +1,5 @@
 // Replace with your deployed Worker URL
-const WORKER_URL = "https://your-worker-subdomain.workers.dev/";
-
+const WORKER_URL = "https://cyron-worker.gx8nz7qrdr.workers.dev";
 const submitBtn = document.getElementById("submit");
 const promptInput = document.getElementById("prompt");
 const chatBox = document.getElementById("chat-box");
