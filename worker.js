@@ -1,12 +1,13 @@
 export default {
   async fetch(request, env) {
     if (request.method === "GET") {
+      // Simple HTML form for testing
       const html = `
         <!DOCTYPE html>
         <html lang="en">
         <head><meta charset="UTF-8"><title>Test Worker</title></head>
         <body>
-          <h1>Test Hugging Face Worker</h1>
+          <h1>Test Meta LLaMA 3 8B Worker</h1>
           <form id="promptForm">
             <input type="text" name="prompt" placeholder="Enter prompt" />
             <button type="submit">Send</button>
@@ -37,20 +38,23 @@ export default {
         const HF_TOKEN = env.HF_TOKEN;
         if (!HF_TOKEN) throw new Error("Hugging Face token not set in environment");
 
-        // Correct working URL for Hugging Face Inference API
         const response = await fetch(
-          `https://api-inference.huggingface.co/models/gpt-neo-2.7B`,
+          "https://router.huggingface.co/api/chain/completions",
           {
             method: "POST",
             headers: {
               "Authorization": `Bearer ${HF_TOKEN}`,
               "Content-Type": "application/json"
             },
-            body: JSON.stringify({ inputs: prompt })
+            body: JSON.stringify({
+              model: "meta-llama/Llama-3-8b-chat-hf",
+              input: prompt
+            })
           }
         );
 
         const data = await response.json();
+
         return new Response(JSON.stringify({ output: data }), {
           headers: { "Content-Type": "application/json" },
         });
